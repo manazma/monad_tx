@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 
 # Konfigurasi logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+
 # Watermark
 WATERMARK = """
 
@@ -61,13 +62,13 @@ def get_mon_balance():
     return web3.eth.get_balance(WALLET_ADDRESS) / 10**18
 
 def human_like_delay():
-    delay = random.uniform(30, 500)
+    delay = random.uniform(10, 31)
     logging.info(f"Menunggu {delay:.2f} detik sebelum transaksi berikutnya...")
     time.sleep(delay)
 
 def stake_mon():
     try:
-        amount_wei = web3.to_wei(random.uniform(0.001, 0.05), 'ether')
+        amount_wei = web3.to_wei(random.uniform(0.01, 0.05), 'ether')
         tx = staking_contract.functions.depositMon().build_transaction({
             'from': WALLET_ADDRESS,
             'value': amount_wei,
